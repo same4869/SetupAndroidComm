@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import commlib.xun.com.commlib.thread.CommThreadPool;
 import setupandroidcomm.xun.com.setupandroidcomm.R;
 import setupandroidcomm.xun.com.setupandroidcomm.net.IRequestCallback;
 import setupandroidcomm.xun.com.setupandroidcomm.net.IRequestManager;
@@ -40,9 +39,9 @@ public class NetActivity extends AppCompatActivity implements View.OnClickListen
     }
 
     private void requestNetwork() {
-        CommThreadPool.poolExecute(new Runnable() {
-            @Override
-            public void run() {
+//        CommThreadPool.poolExecute(new Runnable() {
+//            @Override
+//            public void run() {
                 requestManager.get(url, new IRequestCallback() {
                     @Override
                     public void onSuccess(String response) {
@@ -54,8 +53,8 @@ public class NetActivity extends AppCompatActivity implements View.OnClickListen
                         throwable.printStackTrace();
                     }
                 });
-            }
-        });
+//            }
+//        });
     }
 
     @Override
@@ -63,7 +62,7 @@ public class NetActivity extends AppCompatActivity implements View.OnClickListen
         switch (v.getId()) {
             case R.id.request_volley_btn:
                 requestManager = RequestFactory.getRequestManager(RequestFactory.RequestType.VOLLEY);
-                //HTTPSTrustManager.allowAllSSL();
+//                HTTPSTrustManager.allowAllSSL();
                 requestNetwork();
                 break;
             case R.id.request_okhttp_btn:
