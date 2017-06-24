@@ -9,7 +9,7 @@ import android.widget.Button;
 import setupandroidcomm.xun.com.setupandroidcomm.R;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    private Button networkBtn;
+    private Button networkBtn,crashBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void initView() {
         networkBtn = (Button) findViewById(R.id.networkBtn);
         networkBtn.setOnClickListener(this);
+        crashBtn = (Button) findViewById(R.id.crashBtn);
+        crashBtn.setOnClickListener(this);
     }
 
     @Override
@@ -30,6 +32,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.networkBtn:
                 Intent intent = new Intent(this, NetActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.crashBtn:
+                crashBtn = null;
+                crashBtn.setText("");
                 break;
             default:
                 break;
