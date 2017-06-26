@@ -28,6 +28,8 @@ import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import setupandroidcomm.xun.com.setupandroidcomm.utils.CacheStoreUtil;
+
 /**
  * Created by xunwang on 2017/6/23.
  */
@@ -65,7 +67,7 @@ public class CommLogHandler implements Thread.UncaughtExceptionHandler {
     //用于格式化日期,作为日志文件名的一部分
     private DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
 
-    private static String mDirPath = Environment.getExternalStorageDirectory().getPath() + "/crashlog";
+    private static String mDirPath = null;
     private String mExceptionInfos;
     //上传文件具体实现
     private CrashUploader mCrashUploader;
@@ -88,6 +90,7 @@ public class CommLogHandler implements Thread.UncaughtExceptionHandler {
         mContext = context.getApplicationContext();
         mDefaultHandler = Thread.getDefaultUncaughtExceptionHandler();
         Thread.setDefaultUncaughtExceptionHandler(getInstance());
+        mDirPath = CacheStoreUtil.getCacheDir(mContext).toString();
         File mDirectory = new File(mDirPath);
         if (!mDirectory.exists()) {
             mDirectory.mkdirs();
