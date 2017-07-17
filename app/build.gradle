@@ -9,6 +9,10 @@ android {
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
+        ndk{
+            moduleName "security"         //生成的so名字
+            abiFilters "armeabi", "armeabi-v7a", "x86"  //输出指定三种abi体系结构下的so库。目前可有可无。
+        }
     }
     buildTypes {
         release {
@@ -16,6 +20,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    sourceSets {
+        main {
+            jni.srcDirs = []//设置禁止gradle生成Android.mk
+            jniLibs.srcDirs = ['src/main/jniLibs']//设置目标的so存放路径
+        }
+    }
+
 }
 
 dependencies {
